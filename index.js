@@ -54,3 +54,15 @@ httpServer.listen(port, function() {
 // This will enable the Live Query real-time server
 ParseServer.createLiveQueryServer(httpServer);
 
+Parse.initialize('myAppId','unused');
+Parse.serverURL = 'https://appname-1.herokuapp.com';
+
+var obj = new Parse.Object('GameScore');
+obj.set('score',1337);
+obj.save().then(function(obj) {
+  console.log(obj.toJSON());
+  var query = new Parse.Query('GameScore');
+  query.get(obj.id).then(function(objAgain) {
+    console.log(objAgain.toJSON());
+  }, function(err) {console.log(err); });
+}, function(err) { console.log(err); });
