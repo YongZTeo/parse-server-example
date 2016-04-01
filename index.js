@@ -14,7 +14,7 @@ if (!databaseUri) {
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'myAppId',
+  appId: process.env.APP_ID || 'APPLICATION_ID',
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
@@ -54,11 +54,11 @@ httpServer.listen(port, function() {
 // This will enable the Live Query real-time server
 ParseServer.createLiveQueryServer(httpServer);
 
-Parse.initialize('myAppId','unused');
+Parse.initialize('APPLICATION_ID','unused');
 Parse.serverURL = 'https://appname-1.herokuapp.com';
 
 var obj = new Parse.Object('GameScore');
-obj.set('score',1337);
+obj.set('score',9999);
 obj.save().then(function(obj) {
   console.log(obj.toJSON());
   var query = new Parse.Query('GameScore');
